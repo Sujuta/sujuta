@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>store</title>
+  <style> body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 900px;
+    height: 500x;
+    margin: 60px ;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.product-display {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.product-images {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.product-images .main-image,
+.product-images .video-container {
+    width: 100%;
+    height: 300px; /* Adjusted height */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.product-images .main-image img,
+.product-images .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-images .main-image img:hover,
+.product-images .video-container video:hover {
+    transform: scale(1.05); /* Adjusted scale */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail-images {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    flex-direction: column;
+}
+
+.thumbnail-images img {
+    width: 80px; /* Adjusted size */
+    height: 80px; /* Adjusted size */
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.thumbnail-images img:hover {
+    transform: scale(1.1); /* Adjusted scale */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-info {
+    flex: 3;
+    color: #0A0245;
+}
+
+.product-info h1 {
+    font-size: 32px; /* Adjusted font size */
+    margin: 0;
+    color: #5032D2;
+    transition: color 0.4s ease;
+}
+
+.product-info h1:hover {
+    color: #0A0245;
+}
+
+
+.buttons {
+    display: flex;
+    gap: 16px; /* Adjusted gap */
+    margin-left: 25px;
+    flex-direction: column;
+    margin: 25px;
+    align-items: start;
+
+}
+
+.buttons button {
+    padding: 14px 28px; /* Adjusted padding */
+    font-size: 16px; /* Adjusted font size */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, transform 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.buy-button {
+    background-color: #5032D2;
+}
+
+.buy-button:hover {
+    background-color: #0A0245;
+    transform: translateY(-2px); /* Adjusted transform */
+}
+
+.cart-button {
+    background-color: #e67e22;
+}
+
+.cart-button:hover {
+    background-color: #d35400;
+    transform: translateY(-2px); /* Adjusted transform */
+}
+
+.customer-reviews, .suggested-products, .offers-section {
+    margin-top: 30px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.customer-reviews h2, .suggested-products h2, .offers-section h2 {
+    border-bottom: 3px solid #ddd;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    color: #5032D2;
+}
+
+.review {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+}
+
+.review h3 {
+    margin: 0;
+    color: #333;
+}
+
+.review-rating {
+    color: #f5c518;
+    font-size: 18px; /* Adjusted font size */
+}
+
+.review-form {
+    margin-top: 24px;
+}
+
+.review-form textarea {
+    width: 100%;
+    height: 100px; /* Adjusted height */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    resize: none;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.review-form textarea:focus {
+    border-color: #5032D2;
+    outline: none;
+    box-shadow: 0 0 8px rgba(80, 50, 210, 0.3);
+}
+
+.review-form button {
+    margin-top: 12px;
+    padding: 12px 24px;
+    background-color: #5032D2;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, transform 0.3s ease;
+    box-shadow: 0 6px 12px rgba(80, 50, 210, 0.3);
+}
+
+.review-form button:hover {
+    background-color: #0A0245;
+    transform: translateY(-2px); /* Adjusted transform */
+}
+
+.rating-stars {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.rating-stars label {
+    font-size: 24px; /* Adjusted font size */
+    color: #ccc;
+    cursor: pointer;
+}
+
+.rating-stars input[type="radio"]:checked ~ label {
+    color: #f5c518;
+}
+
+.rating-stars input[type="radio"]:checked ~ label ~ label {
+    color: #f5c518;
+}
+
+.suggested-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjusted size */
+    gap: 20px; /* Adjusted gap */
+}
+
+.suggested-product {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    padding: 12px; /* Adjusted padding */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.suggested-product img {
+    width: 100%;
+    height: 180px; /* Adjusted height */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s ease;
+}
+
+.suggested-product:hover img {
+    transform: scale(1.05); /* Adjusted scale */
+}
+
+.suggested-product:hover {
+    transform: scale(1.02); /* Adjusted scale */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.quantity-controls button {
+    width: 30px; /* Set equal width and height for a perfect circle */
+    height: 30px;
+    margin: 0 5px;
+   
+    cursor: pointer;
+    border: none; /* Remove default border */
+    border-radius: 50%; /* Make the button circular */
+    display: flex; /* Center the text/icon */
+    justify-content: center;
+    align-items: center;
+}
+
+        header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav .btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav .btn:hover {
+    background-color: #5032D2;
+    color: #fff;
+}
+
+nav .btn i {
+    font-size: 18px;
+}
+
+nav .btn-outline-dark {
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+nav .btn-outline-dark:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+<body id="home">
+    <header class="d-flex justify-content-between align-items-center p-3">
+    
+        <nav class="d-flex gap-3">
+          <a href="index.html"><button class="btn btn-outline-dark">Shop</button></a>
+          <a href="about.html"><button class="btn btn-outline-dark">About</button></a>
+          <button class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
+          
+          &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+          &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+          <a href="login.html"><button class="btn btn-outline-dark  "><i class="bi bi-person"></i></button></a>
+          
+          <button class="btn btn-outline-dark">Bag</button>
+         
+        </nav>
+      </header>
+    <div class="container">
+        <div class="product-display">
+            <div class="product-images">
+                <img id="main-image" src="img/m1.webp" alt="Main Image" height="300px" width="300px">
+               
+                <div class="thumbnail-images">
+                    <img src="img/m1.1.webp" alt="Image 1" data-full="img/m1.1.webp">
+                    <img src="img/m1.2.webp" alt="Image 2" data-full="img/m1.2.webp">
+                    <img src="img/m1.3.webp" alt="Image 3" data-full="img/m1.3.webp">
+                    <img src="img/m1.4.webp" alt="Image 4" data-full="img/m1.4.webp">
+                   
+                </div>
+                
+            </div>
+            <div class="product-info">
+                <h1>Stylish Men shirt</h1><br>
+               
+                <div class="rating">
+                    <span class="rating-stars">
+                        <input type="radio" name="rating" id="star5" value="5" checked>
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" name="rating" id="star4" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" name="rating" id="star3" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" name="rating" id="star2" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" name="rating" id="star1" value="1">
+                        <label for="star1">&#9733;</label>
+                    </span>
+                </div>
+                <div class="price">₹<span id="price-inr">999</span></div>
+                <div class="quantity-controls">
+                    <button id="decrease-qty">-</button>
+                    <span class="quantity-display" id="quantity">1</span>
+                    <button id="increase-qty">+</button>
+                </div>
+            
+                <div class="total-price">Total: ₹<span id="total-price">999</span></div>
+            
+                
+                <div class="buttons">
+                    <a href="placeform.html"><button class="cart-button">SOLD OUT</button></a>
+                    <p>Inspired by the endless cycle of creation</p>
+                </div>
+            </div>
+        </div>
+        
+    <script>
+
+       
+document.addEventListener('DOMContentLoaded', function () {
+    const mainImage = document.getElementById('main-image');
+    const thumbnails = document.querySelectorAll('.thumbnail-images img');
+
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function () {
+            const fullImagePath = this.getAttribute('data-full');
+            if (fullImagePath) {
+                mainImage.src = fullImagePath;
+            }
+        });
+    });
+});
+
+const pricePerItem = 1499; // Price of a single item
+        const quantityDisplay = document.getElementById('quantity');
+        const totalPriceDisplay = document.getElementById('total-price');
+        const decreaseQtyBtn = document.getElementById('decrease-qty');
+        const increaseQtyBtn = document.getElementById('increase-qty');
+
+        let quantity = 1;
+
+        // Function to update total price
+        function updateTotalPrice() {
+            const totalPrice = pricePerItem * quantity;
+            totalPriceDisplay.textContent = totalPrice;
+        }
+
+        // Decrease quantity
+        decreaseQtyBtn.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                quantityDisplay.textContent = quantity;
+                updateTotalPrice();
+            }
+        });
+
+        // Increase quantity
+        increaseQtyBtn.addEventListener('click', () => {
+            quantity++;
+            quantityDisplay.textContent = quantity;
+            updateTotalPrice();
+        });
+
+
+
+
+        </script>
+     
+        
+</body>
+</html>

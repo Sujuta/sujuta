@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma Store Clone</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+  <style>
+
+header{
+  background-color: #fcd303;
+  
+ 
+}
+section{
+  background-color: #fcd303;
+  border-bottom: 5px solid;
+  
+}
+/* Horizontal Scrolling Container */
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 20px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+div[class*="-shape"] {
+  flex: 0 0 300px; /* Ensure all items have the same width */
+  height: 500px;
+  width: 500px;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid black;
+}
+
+/* Apply object-fit to ensure the image fits the container */
+div[class*="-shape"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the container */
+}
+
+
+/* HTML: <div class="cloud"></div> */
+.circle-shape {
+    height: 180px; /* control the size */
+    aspect-ratio: 1.8;
+    --g: radial-gradient(50% 50%, #000 98%, #0000) no-repeat;
+    mask: var(--g) 100% 100%/30% 60%,var(--g) 70% 0/50% 100%,var(--g) 0 100%/36% 68%,var(--g) 27% 18%/26% 40%,linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
+    background: #269af2;
+}
+
+/* Star Shape */
+.polygon {
+  width: 200px; /* adjust to control the size */
+  aspect-ratio: 1;
+  clip-path: polygon(100% 50%,90.45% 79.39%,65.45% 97.55%,34.55% 97.55%,9.55% 79.39%,0% 50%,9.55% 20.61%,34.55% 2.45%,65.45% 2.45%,90.45% 20.61%,100% 50%,calc(90.45% - 16.18px) calc(20.61% - -11.76px),calc(65.45% - 6.18px) calc(2.45% - -19.02px),calc(34.55% - -6.18px) calc(2.45% - -19.02px),calc(9.55% - -16.18px) calc(20.61% - -11.76px),calc(0% - -20px) calc(50% - 0px),calc(9.55% - -16.18px) calc(79.39% - 11.76px),calc(34.55% - -6.18px) calc(97.55% - 19.02px),calc(65.45% - 6.18px) calc(97.55% - 19.02px),calc(90.45% - 16.18px) calc(79.39% - 11.76px),calc(100% - 20px) calc(50% - 0px),calc(90.45% - 16.18px) calc(20.61% - -11.76px));
+}
+
+
+.star-shape {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: orange;
+}
+.star-shape {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: orange;
+}
+
+/* Hexagon Shape */
+.hexagon-shape {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Heart Shape */
+.heart-shape {
+  --b: 60px; /* base */
+  --h: 40px; /* height  */
+
+  height: 250px;
+  aspect-ratio: 1.2;
+  border-radius: 20px;
+  background: #F0A830;
+  clip-path: polygon(0 0,100% 0,100% calc(50% - var(--b)/2),calc(100% - var(--h)) 50%,100% calc(50% + var(--b)/2),100% 100%,0 100%,0 calc(50% + var(--b)/2),var(--h) 50%,0 calc(50% - var(--b)/2));
+}
+
+
+
+.cloud-shape{
+  width: 200px; /* adjust to control the size */
+  aspect-ratio: 1;
+  --g:/20.56% 20.56% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+  mask: 100% 50% var(--g),93.301% 75% var(--g),75% 93.301% var(--g),50% 100% var(--g),25% 93.301% var(--g),6.699% 75% var(--g),0% 50% var(--g),6.699% 25% var(--g),25% 6.699% var(--g),50% 0% var(--g),75% 6.699% var(--g),93.301% 25% var(--g),radial-gradient(100% 100%,#000 38.366%,#0000 calc(38.366% + 1px));
+}
+
+/* Square Shape */
+.square-shape{
+  width: 200px; /* adjust to control the size */
+  aspect-ratio: 1;
+  clip-path: polygon(100% 50%,90.45% 79.39%,65.45% 97.55%,34.55% 97.55%,9.55% 79.39%,0% 50%,9.55% 20.61%,34.55% 2.45%,65.45% 2.45%,90.45% 20.61%);
+}
+
+/* Trefoil Shape */
+.trefoil-shape {
+  position: relative;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  /* You might need to adjust or combine shapes for the trefoil */
+}
+
+/* Oval Shape */
+.oval-shape {
+  clip-path: ellipse(70% 50% at 50% 50%); /* Example of an oval shape */
+}
+/* Hide the arrows */
+.arrow {
+  display: none;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.container :hover{
+  color: gray;
+  text-shadow: 2px 2px 4px gray;
+}
+.figma {
+  font-size: 40px;
+  font-weight: bold;
+}
+.layers {
+  font-size: 40px;
+  font-weight: bold;
+}
+.you {
+  font-size: 40px;
+  font-weight: bold;
+}
+.icons {
+  font-size: 30px;
+}
+.container1 {
+        display: flex;
+        justify-content: center; /* Centers the cards horizontally */
+        align-items: center; /* Centers the cards vertically */
+        gap: 20px; /* Adds space between the cards */
+        flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .card {
+        width: 250px; /* Set the width of each card */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+        border-top-left-radius: 20%;
+        border-top-right-radius: 20%;
+        border-bottom-left-radius: 20%;
+        border-bottom-right-radius: 20%;
+    }
+
+    .card img {
+        width: 100%;
+        height: 250px;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-title {
+        text-align: left;
+    }
+
+    .card-price {
+        color: #333;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+        .copyright {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .banner {
+  position: relative;
+
+  text-align: center;
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 450px;
+  bottom: 600px;
+  transform: translate(-50%, -50%);
+  color: rgb(1, 1, 1); 
+  z-index: 1; 
+}
+
+.banner img {
+  width: 900px; /* Makes the image fill the width of the container */
+  height: 500px; /* Adjusts the height based on the width */
+  border: 5px solid;
+}
+.btn{
+    height: 35px;
+}
+
+/* For tablets (screen width less than 768px) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack navigation vertically */
+    }
+
+    .scroll-container div {
+        flex: 0 0 70%; /* Reduce item size in scroll container */
+        height: 300px; /* Adjust height */
+    }
+
+    .banner img {
+        width: 100%; /* Make banner image full width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .container1 .card {
+        width: 200px; /* Reduce card size */
+    }
+}
+
+/* For small devices (screen width less than 480px) */
+@media (max-width: 480px) {
+    nav a {
+        font-size: 12px; /* Adjust button text size */
+    }
+
+    .scroll-container div {
+        flex: 0 0 90%; /* Adjust item size further */
+        height: 200px; /* Further height reduction */
+    }
+
+    .container {
+        font-size: 20px; /* Reduce text size */
+    }
+
+    footer {
+        flex-direction: column; /* Stack footer sections vertically */
+    }
+}
+
+
+
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  
+
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="d-flex justify-content-between align-items-center p-3">
+    
+    <nav class="d-flex gap-3">
+      <a href="index.html"><button class="btn btn-outline-dark">Shop</button></a>
+      <a href="about.html"><button class="btn btn-outline-dark">About</button></a>
+      
+        <!-- Button to toggle collapse -->
+        <button class="btn btn-outline-dark" data-bs-toggle="collapse" data-bs-target="#searchField" aria-expanded="false" aria-controls="searchField">
+          <i class="bi bi-search"></i>
+        </button>
+        <!-- Collapsible search field -->
+        <div class="collapse mt-2" id="searchField">
+          <input type="text" class="form-control" placeholder="Search...">
+        </div>
+      </div>
+      
+      &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+      &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+      <a href="login.html"><button class="btn btn-outline-dark  "><i class="bi bi-person"></i></button></a>
+      
+      <button class="btn btn-outline-dark">Bag</button>
+     
+    </nav>
+  </header>
+
+  <section class="position-relative">
+    <!-- Arrows -->
+    <button class="arrow arrow-left">&lt;</button>
+    <button class="arrow arrow-right">&gt;</button>
+
+    <!-- Scrolling Container -->
+    <div class="scroll-container">
+        <!-- Circle Shape -->
+        <div class="circle-shape">
+            <a href="s.html"><img src="shoes.webp" alt="Circle Shape"></a>
+        </div>
+
+        <!-- Star Shape -->
+        <div class="star-shape">
+            <a href="w3.html"><img src="img/w3.webp" alt="Star Shape"></a>
+        </div>
+
+        <!-- Cloud Shape -->
+        <div class="cloud-shape">
+            <a href="w1.html"><img src="img/w1.1.webp" alt="Cloud Shape"></a>
+        </div>
+
+        <!-- Square Shape -->
+        <div class="square-shape">
+            <a href="m2.html"><img src="img/m1.webp" alt="Square Shape"></a>
+        </div>
+          <!-- Hexagon Shape -->
+          <div class="hexagon-shape">
+            <a href="w2.html"><img src="img/w2.webp" alt="Hexagon Shape"></a>
+        </div>
+
+     
+        <div class="heart-shape">
+          <a href="m3.html"><img src="img/m2.2.webp" alt="Trefoil Shape"></a>
+      </div>
+       
+        <!-- Oval Shape -->
+        <div class="oval-shape">
+            <a href="w4.html"><img src="img/w4.webp" alt="Oval Shape"></a>
+        </div>
+
+        <!-- Hexagon Shape -->
+        <div class="hexagon-shape">
+               <a href="a.html"> <img src="img/asss.webp" alt="Hexagon Shape"></a>
+        </div>
+    </div>
+  </section>
+<br><br>
+  <div class="container">
+    <div class="figma">FIGMA'S <span class="icons">&#10052;</span> COLLECTION <span class="icons">&#128309;</span> OF</div>
+    <div class="layers">LAYERS <span class="icons">&#128073;</span> AND <span class="icons">&#128337;</span> COMPONENTS <span class="icons">&#128340;</span> FOR</div>
+    <div class="you">YOU <span class="icons">&#128164;</span> AND <span class="icons">&#128176;</span> YOUR <span class="icons">&#128315;</span> FRIENDS</div>
+  </div>
+
+
+
+  <div class="banner">
+    <div class="banner-content">
+      <h1>Figma work <br>Louder</h1>
+      <p>meet the limited edition <br> Figma Creator micro keybord.</p>
+    </div>
+    <img src="img/banner.webp" alt="Banner" height="500px" style="border: 5px solid;">
+  </div>
+  
+
+
+  <div class="container1">
+    <div class="card">
+        <a href="women.html"><img src="img/w1.webp" alt="The Prompt Magazine"></a>
+        <div class="card-content">
+            <h5 class="card-title">Category!</h3>
+            <h5 class="card-title">women</h2>
+          
+        </div>
+    </div>
+    <div class="card">
+       <a href="men.html"><img src="img/m1.webp" alt="Chunky Glyph Tee"></a> 
+        <div class="card-content">
+            <h5 class="card-title">Category!</h3>
+            <h5 class="card-title">men</h2>
+            
+        </div>
+    </div>
+    <div class="card">
+       <a href="ac.html"> <img src="img/asss.webp" alt="Vintage Backpack"></a>
+        <div class="card-content">
+            <h5 class="card-title">Category!</h3>
+            <h5 class="card-title">Accessories</h2>
+           
+        </div>
+    </div>
+</div>
+
+
+
+<footer style="background-color: #fcd303;;">
+    <div id="footer-container">
+        <!-- Talk Bubble -->
+        <div id="talkbubble"></div>
+
+        <!-- Contact Information -->
+        <div class="footer-section">
+            <p><strong>Contact Us</strong></p>
+            <ul>
+                <li>📍 Address: 1234 Figma Avenue, Design City, DX 56789</li>
+                <li>📞 Phone: +1-234-567-890</li>
+                <li>📧 Email: <a href="mailto:support@figmacreator.com">support@figmacreator.com</a></li>
+            </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <p><strong>Quick Links</strong></p>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="home.html">Shop</a></li>
+                <li><a href="login.html">Contact</a></li>
+            </ul>
+        </div>
+
+        
+    </div>
+    <marquee>
+        <p>
+            🤖☆*: .｡. o(≧▽≦)o .｡.:*☆ Meet the limited edition Figma Creator micro keyboard. ⏹️ Available now! 🥳
+        </p>
+    </marquee>
+
+    <style>
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px 0;
+        }
+
+        #footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #talkbubble {
+            width: 120px;
+            height: 80px;
+            background: rgb(70, 58, 204);
+            position: relative;
+            border-radius: 10px;
+            margin: 100px;
+        }
+
+        #talkbubble:before {
+            content: "";
+            position: absolute;
+            right: 100%;
+            top: 26px;
+            width: 0;
+            height: 0;
+            border-top: 13px solid transparent;
+            border-right: 26px solid rgb(70, 58, 204);
+            border-bottom: 13px solid transparent;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 0 10px;
+        }
+
+        .footer-section p {
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(70, 58, 204);
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin: 8px 0;
+        }
+
+        .footer-section ul li a {
+            color: rgb(70, 58, 204);
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        marquee p {
+            font-size: 14px;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+    #footer-container {
+        flex-direction: column;
+        align-items: center; /* Center-align items */
+    }
+}
+
+    </style>
+</footer>
+
+
+
+  <script>
+    // JavaScript for Arrow Navigation
+    const scrollContainer = document.querySelector('.scroll-container');
+    const leftArrow = document.querySelector('.arrow-left');
+    const rightArrow = document.querySelector('.arrow-right');
+
+    leftArrow.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+
+    rightArrow.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
